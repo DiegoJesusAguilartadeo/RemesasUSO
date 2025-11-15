@@ -38,3 +38,6 @@ Thumbs.db
 # ======================================
 nbactions.xml
 nb-configuration.xml
+remesas-web/src/java/config/
+*.properties
+*.json
