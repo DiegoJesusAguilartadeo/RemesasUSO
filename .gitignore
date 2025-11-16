@@ -1,0 +1,43 @@
+# ===========================
+#  IGNORAR ARCHIVOS DE BUILD
+# ===========================
+/remesas-web/build/
+/remesas-web/dist/
+/remesas-web/nbproject/private/
+/remesas-web/out/
+/remesas-web/target/
+/remesas-web/.classpath
+/remesas-web/.project
+/remesas-web/.settings/
+
+# ======================================
+#  ARCHIVOS DE CONFIGURACIÓN SENSIBLES
+# ======================================
+# No subir llaves, tokens ni secrets
+remesas-web/src/java/config/config.properties
+remesas-web/src/java/config/*.properties
+remesas-web/src/java/client_secret.json
+client_secret.json
+
+# ======================================
+#    IGNORAR ARCHIVOS TEMPORALES
+# ======================================
+*.log
+*.tmp
+*.bak
+*.swp
+
+# ======================================
+#   ARCHIVOS DEL SISTEMA
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+#   ARCHIVOS NETBEANS
+# ======================================
+nbactions.xml
+nb-configuration.xml
+remesas-web/src/java/config/
+*.properties
+*.json
