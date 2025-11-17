@@ -9,5 +9,7 @@
   <li><a href="remitente/listar.jsp">Listar Remitentes</a></li>
   <li><a href="remesa/registrar.jsp">Registrar Remesa</a></li>
   <li><a href="remesa/listar.jsp">Listar Remesas</a></li>
+  <li><a href="remesa/cobrar.jsp">cobrar</a></li>
+
 </ul>
 </body></html>
