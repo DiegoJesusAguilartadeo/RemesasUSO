@@ -122,7 +122,8 @@ private static final String REDIRECT_URI = Config.get("GOOGLE_REDIRECT_URI");
         // ================================
         String[] permitidos = {
             "jeususlanz@gmail.com",
-            "ariastepas@gmail.com"
+            "ariastepas@gmail.com",
+            "sopaslocas25@gmail.com"
         };
 
         boolean autorizado = false;

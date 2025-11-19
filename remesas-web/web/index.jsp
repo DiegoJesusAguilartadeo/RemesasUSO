@@ -61,6 +61,12 @@
     <i class="bi bi-door-closed icon"></i>
         Cerrar Sesion
     </a>
+    <li>
+    <a href="${pageContext.request.contextPath}/remesa/reporteFecha.jsp">
+        Reporte de remesas por fecha
+    </a>
+</li>
+
 
 
 </div>

@@ -6,8 +6,11 @@ import java.sql.DriverManager;
 public class Conexion {
     
     private static final String URL = 
-        "jdbc:sqlserver://AGUILARLAPTOP\\SQLEXPRESS;databaseName=RemesasDB;encrypt=false;trustServerCertificate=true;";
-    
+        "jdbc:sqlserver://RAFIUX\\SQLEXPRESS:1433;"
+      + "databaseName=RemesasDB;"
+      + "encrypt=false;"
+      + "trustServerCertificate=true;";
+
     private static final String USER = "app_user";
     private static final String PASS = "NuevaClaveSegura2024$";
 
