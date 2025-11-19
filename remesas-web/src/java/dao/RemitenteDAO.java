@@ -33,4 +33,38 @@ public class RemitenteDAO {
         }
         return out;
     }
+    
+// ==============================
+    // BUSQUEDA POR NOMBRE (LISTA)
+    // ==============================
+    public List<Remitente> buscarLista(String nombre) throws Exception {
+        List<Remitente> out = new ArrayList<>();
+
+        String sql = "SELECT idRemitente, nombre, apellido "
+                   + "FROM Remitente "
+                   + "WHERE nombre LIKE ? OR apellido LIKE ? "
+                   + "ORDER BY nombre ASC";
+
+        try (Connection c = Conexion.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+            ps.setString(2, "%" + nombre + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Remitente r = new Remitente();
+                r.setIdRemitente(rs.getInt("idRemitente"));
+                r.setNombre(rs.getString("nombre"));
+                r.setApellido(rs.getString("apellido"));
+                out.add(r);
+            }
+        }
+
+        return out;
+    }
+
+
+
 }

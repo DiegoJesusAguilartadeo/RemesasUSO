@@ -157,4 +157,37 @@ public class DestinatarioDAO {
         // Devolvemos la lista, que puede estar vacía si no hay registros.
         return out;
     }
+    // ==============================
+    // BUSQUEDA POR NOMBRE (LISTA)
+    // ==============================
+    public List<Destinatario> buscarLista(String nombre) throws Exception {
+        List<Destinatario> out = new ArrayList<>();
+
+        String sql = "SELECT idDestinatario, nombre, apellido "
+                   + "FROM Destinatario "
+                   + "WHERE nombre LIKE ? OR apellido LIKE ? "
+                   + "ORDER BY nombre ASC";
+
+        try (Connection c = Conexion.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+            ps.setString(2, "%" + nombre + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Destinatario d = new Destinatario();
+                d.setIdDestinatario(rs.getInt("idDestinatario"));
+                d.setNombre(rs.getString("nombre"));
+                d.setApellido(rs.getString("apellido"));
+                out.add(d);
+            }
+        }
+
+        return out;
+    }
+
+
+    
 }
