@@ -1,12 +1,24 @@
 package controllers;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author jeusu
+ */
 import dao.RemesaDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
-@WebServlet("/remesa/cobrar")
+@WebServlet(name = "RemesaCobrarServlet", urlPatterns = {"/remesa/cobrar"})
 public class RemesaCobrarServlet extends HttpServlet {
 
     @Override
@@ -16,25 +28,13 @@ public class RemesaCobrarServlet extends HttpServlet {
         String pin = req.getParameter("pin");
 
         try {
-            HttpSession session = req.getSession(false);
-            Integer idEmpleadoCobro = null;
-            if (session != null && session.getAttribute("usuario_idEmpleado") != null) {
-                idEmpleadoCobro = (Integer) session.getAttribute("usuario_idEmpleado");
-            } else {
-                // Si no hay sesión válida -> error (no autorizado)
-                req.setAttribute("error", "Sesión no válida. Inicie sesión con Google.");
-                req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
-                return;
-            }
-
             RemesaDAO dao = new RemesaDAO();
-            dao.cobrarRemesa(pin, idEmpleadoCobro);
+            dao.cobrarRemesa(pin);   // ESTE MÉTODO LO ARMAMOS AHORA MISMO
 
             req.setAttribute("pin", pin);
-            req.getRequestDispatcher("/remesa/comprobante.jsp").forward(req, resp);
+            req.getRequestDispatcher("/remesa/comprobanteCobro.jsp").forward(req, resp);
 
         } catch (Exception ex) {
-            ex.printStackTrace();
             req.setAttribute("error", ex.getMessage());
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }

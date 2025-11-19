@@ -15,7 +15,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import model.Remesa;
 
-@WebServlet("/remesa/buscar")
+@WebServlet("/remesa/buscarCobro")
 public class RemesaBuscarCobroServlet extends HttpServlet {
 
     @Override
@@ -25,7 +25,8 @@ public class RemesaBuscarCobroServlet extends HttpServlet {
         String pin = req.getParameter("pin");
 
         try {
-            Remesa r = new RemesaDAO().buscarPorPin(pin);
+            RemesaDAO dao = new RemesaDAO();
+            Remesa r = dao.buscarPorPin(pin);
 
             if (r == null) {
                 req.setAttribute("error", "No existe una remesa con ese PIN.");
@@ -33,12 +34,18 @@ public class RemesaBuscarCobroServlet extends HttpServlet {
                 return;
             }
 
+            // ⭐⭐⭐ PASO NUEVO: Verificar si ya debe estar disponible ⭐⭐⭐
+            dao.verificarDisponibilidad(r);
+
+            // ⭐⭐ Después de verificar disponibilidad, YA TIENE EL ESTADO VERDADERO ⭐⭐
             if (!"DISPONIBLE".equals(r.getEstado())) {
-                req.setAttribute("error", "La remesa no está disponible: " + r.getEstado());
+                req.setAttribute("error",
+                    "La remesa no está disponible para cobro. Estado actual: " + r.getEstado());
                 req.getRequestDispatcher("/remesa/cobrar.jsp").forward(req, resp);
                 return;
             }
 
+            // Si está DISPONIBLE → mostrar pantalla de confirmación
             req.setAttribute("remesa", r);
             req.getRequestDispatcher("/remesa/confirmarCobro.jsp").forward(req, resp);
 
