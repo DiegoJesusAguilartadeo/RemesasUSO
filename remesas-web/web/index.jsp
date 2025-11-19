@@ -61,6 +61,18 @@
     <i class="bi bi-door-closed icon"></i>
         Cerrar Sesion
     </a>
+    
+<a class="card-menu" href="${pageContext.request.contextPath}/remesa/remesas_registradas.jsp">
+    <i class="bi bi-people icon"></i>
+    Remesas Registradas
+</a>
+
+<a class="card-menu" href="${pageContext.request.contextPath}/remesa/remesas_cobradas.jsp">
+    <i class="bi bi-person-check icon"></i>
+    Remesas Cobradas
+</a>
+
+
 
 
 </div>

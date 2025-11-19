@@ -6,9 +6,6 @@ import model.Remesa;
 
 public class RemesaDAO {
 
-    // ============================================================
-    // MÉTODO AUXILIAR PARA MAPEAR ResultSet → Remesa
-    // ============================================================
     private Remesa mapear(ResultSet rs) throws Exception {
         Remesa r = new Remesa();
         r.setIdRemesa(rs.getInt("idRemesa"));
@@ -25,18 +22,20 @@ public class RemesaDAO {
         r.setFee(rs.getDouble("fee"));
         r.setNumeroOrden(rs.getString("numeroOrden"));
         r.setFechaCobro(rs.getDate("fechaCobro"));
+        // empleados (si existen columnas)
+        try { r.setIdEmpleadoRegistro((Integer)rs.getObject("idEmpleadoRegistro")); } catch(Exception e) {}
+        try { r.setIdEmpleadoCobro((Integer)rs.getObject("idEmpleadoCobro")); } catch(Exception e) {}
+        try { r.setIdEmpleadoCreador((Integer)rs.getObject("idEmpleadoCreador")); } catch(Exception e) {}
+        try { r.setIdEmpleadoCobrador((Integer)rs.getObject("idEmpleadoCobrador")); } catch(Exception e) {}
         return r;
     }
 
-    // ============================================================
-    // INSERTAR REMESA COMPLETA
-    // ============================================================
     public void insertar(Remesa r) throws Exception {
 
         String sql = "INSERT INTO Remesa " +
                 "(idRemitente, idDestinatario, monto, fechaEnvio, referencia, " +
-                "pin, estado, fechaDisponible, metodoCobro, montoTotal, fee, numeroOrden, fechaCobro) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "pin, estado, fechaDisponible, metodoCobro, montoTotal, fee, numeroOrden, fechaCobro, idEmpleadoRegistro) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection c = Conexion.getConnection();
              PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -54,78 +53,66 @@ public class RemesaDAO {
             ps.setDouble(11, r.getFee());
             ps.setString(12, r.getNumeroOrden());
             ps.setDate(13, r.getFechaCobro());
+            if (r.getIdEmpleadoRegistro() != null) {
+                ps.setInt(14, r.getIdEmpleadoRegistro());
+            } else {
+                ps.setNull(14, Types.INTEGER);
+            }
 
             ps.executeUpdate();
 
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                r.setIdRemesa(rs.getInt(1));
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    r.setIdRemesa(rs.getInt(1));
+                }
             }
         }
     }
 
-    // ============================================================
-    // VERIFICAR DISPONIBILIDAD (24 HORAS DESPUÉS)
-    // ============================================================
     public void verificarDisponibilidad(Remesa r) throws Exception {
-    if (r == null) return;
+        if (r == null) return;
+        long ahora = System.currentTimeMillis();
+        long fechaDisponible = r.getFechaDisponible().getTime();
+        boolean yaPaso24h = ahora >= fechaDisponible;
 
-    long ahora = System.currentTimeMillis();
-    long fechaDisponible = r.getFechaDisponible().getTime();
+        if (yaPaso24h 
+            && !"DISPONIBLE".equals(r.getEstado()) 
+            && !"PAGADA".equals(r.getEstado()) 
+            && !"CANCELADA".equals(r.getEstado())) {
 
-    boolean yaPaso24h = ahora >= fechaDisponible;
+            String sql = "UPDATE Remesa SET estado = 'DISPONIBLE' WHERE idRemesa = ?";
 
-    // 🚫 NO cambiar estado si ya fue PAGADA o CANCELADA
-    if (yaPaso24h 
-        && !"DISPONIBLE".equals(r.getEstado()) 
-        && !"PAGADA".equals(r.getEstado()) 
-        && !"CANCELADA".equals(r.getEstado())) {
+            try (Connection c = Conexion.getConnection();
+                 PreparedStatement ps = c.prepareStatement(sql)) {
+                ps.setInt(1, r.getIdRemesa());
+                ps.executeUpdate();
+            }
 
-        String sql = "UPDATE Remesa SET estado = 'DISPONIBLE' WHERE idRemesa = ?";
-
-        try (Connection c = Conexion.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, r.getIdRemesa());
-            ps.executeUpdate();
+            registrarHistorial(r.getIdRemesa(), "DISPONIBLE");
+            r.setEstado("DISPONIBLE");
         }
-
-        registrarHistorial(r.getIdRemesa(), "DISPONIBLE");
-
-        r.setEstado("DISPONIBLE");
     }
-}
 
-    // ============================================================
-    // BUSCAR POR PIN (AUTOMÁTICAMENTE ACTUALIZA ESTADO)
-    // ============================================================
     public Remesa buscarPorPin(String pin) throws Exception {
-
         String sql = "SELECT * FROM Remesa WHERE pin = ?";
 
         try (Connection c = Conexion.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
             ps.setString(1, pin);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                Remesa r = mapear(rs);
-
-                // 🔥 Verificar disponibilidad automáticamente
-                verificarDisponibilidad(r);
-
-                return r;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Remesa r = mapear(rs);
+                    verificarDisponibilidad(r);
+                    return r;
+                }
             }
         }
         return null;
     }
 
-    // ============================================================
-    // LISTAR TODAS LAS REMESAS
-    // ============================================================
     public List<Remesa> listar() throws Exception {
         List<Remesa> out = new ArrayList<>();
-
         String sql = "SELECT * FROM Remesa ORDER BY idRemesa DESC";
 
         try (Connection c = Conexion.getConnection();
@@ -139,19 +126,20 @@ public class RemesaDAO {
         return out;
     }
 
-    // ============================================================
-    // COBRAR REMESA
-    // ============================================================
-    public void cobrarRemesa(String pin) throws Exception {
+    /**
+     * Cobra la remesa indicando el id del empleado que la cobra (idEmpleadoCobro).
+     */
+    public void cobrarRemesa(String pin, int idEmpleadoCobro) throws Exception {
 
         String sql = "UPDATE Remesa " +
-                     "SET estado = 'PAGADA', fechaCobro = GETDATE() " +
+                     "SET estado = 'PAGADA', fechaCobro = GETDATE(), idEmpleadoCobro = ? " +
                      "WHERE pin = ? AND estado = 'DISPONIBLE'";
 
         try (Connection c = Conexion.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            ps.setString(1, pin);
+            ps.setInt(1, idEmpleadoCobro);
+            ps.setString(2, pin);
 
             int filas = ps.executeUpdate();
 
@@ -161,19 +149,12 @@ public class RemesaDAO {
         }
     }
 
-    // ============================================================
-    // HISTORIAL
-    // ============================================================
     public void registrarHistorial(int idRemesa, String estado) throws Exception {
-
         String sql = "INSERT INTO EstadoRemesaHistorial(idRemesa, estado) VALUES (?, ?)";
-
         try (Connection c = Conexion.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-
             ps.setInt(1, idRemesa);
             ps.setString(2, estado);
-
             ps.executeUpdate();
         }
     }
