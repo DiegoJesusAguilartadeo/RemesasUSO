@@ -42,12 +42,17 @@ public class RemesaRegistrarServlet extends HttpServlet {
             // 3. Generar datos automáticos
             r.setPin(generarPin());
             r.setEstado("PENDIENTE");
-            r.setFechaDisponible(fechaEnvio);        // disponible mismo día (lo puedes cambiar)
-            r.setMetodoCobro("VENTANILLA");          // o del formulario si lo agregas
-            r.setFee(10.00);                         // EJEMPLO: fee fijo de 10 (lo ajustamos luego)
-            r.setMontoTotal(monto + r.getFee());     // cálculo real
+
+            // *** FECHA DISPONIBLE = FECHA ENVÍO + 24 HORAS ***
+            long unDia = 24 * 60 * 60 * 1000; // milisegundos de un día
+            Date fechaDisponible = new Date(fechaEnvio.getTime() + unDia);
+            r.setFechaDisponible(fechaDisponible);
+
+            r.setMetodoCobro("VENTANILLA");     
+            r.setFee(10.00);                   
+            r.setMontoTotal(monto + r.getFee());
             r.setNumeroOrden(generarNumeroOrden());
-            r.setFechaCobro(null);                   // aún no se ha cobrado
+            r.setFechaCobro(null);             
 
             // 4. Guardar en BD
             RemesaDAO dao = new RemesaDAO();
@@ -57,7 +62,7 @@ public class RemesaRegistrarServlet extends HttpServlet {
             dao.registrarHistorial(r.getIdRemesa(), "PENDIENTE");
 
             // 6. Redirigir mostrando el PIN generado
-            resp.sendRedirect(req.getContextPath() + "/remesa/listar.jsp?ok=1&pin="+r.getPin());
+            resp.sendRedirect(req.getContextPath() + "/remesa/listar.jsp?ok=1&pin=" + r.getPin());
 
         } catch (Exception ex) {
             req.setAttribute("error", ex.getMessage());

@@ -5,26 +5,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.Remesa" %>
-<%
-    Remesa r = (Remesa) request.getAttribute("remesa");
-%>
-
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Comprobante</title></head>
-<body>
+<head>
+<meta charset="UTF-8">
+<title>Remesa Cobrada</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 
-<h2>Comprobante de Cobro</h2>
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="text-success">¡Cobro Exitoso!</h3>
 
-<table border="1" cellpadding="8">
-    <tr><th>PIN</th><td><%= r.getPin() %></td></tr>
-    <tr><th>Monto</th><td><%= r.getMonto() %></td></tr>
-    <tr><th>Fee</th><td><%= r.getFee() %></td></tr>
-    <tr><th>Total</th><td><%= r.getMontoTotal() %></td></tr>
-    <tr><th>Fecha Cobro</th><td><%= java.time.LocalDate.now() %></td></tr>
-    <tr><th>Estado</th><td>PAGADA</td></tr>
-</table>
+        <p><strong>PIN:</strong> ${pin}</p>
+        <p>La remesa ha sido pagada correctamente.</p>
+
+        <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-primary w-100 mt-3">
+            Volver al Inicio
+        </a>
+    </div>
+</div>
 
 </body>
 </html>
+
