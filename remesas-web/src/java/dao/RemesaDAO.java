@@ -159,5 +159,51 @@ public void actualizarEstado(int idRemesa, String nuevoEstado, java.sql.Date fec
             ps.executeUpdate();
         }
     }
+    
+    public void cobrarRemesa(String pin) throws Exception {
+    String sql = "UPDATE Remesa " +
+                 "SET estado = 'PAGADA', fechaCobro = GETDATE() " +
+                 "WHERE pin = ? AND estado = 'DISPONIBLE'";
+
+    try (Connection c = Conexion.getConnection();
+         PreparedStatement ps = c.prepareStatement(sql)) {
+
+        ps.setString(1, pin);
+
+        int filas = ps.executeUpdate();
+
+        if (filas == 0) {
+            throw new Exception("La remesa no está disponible para cobro o el PIN no existe.");
+        }
+    }
 }
+    
+    public void actualizarEstado(int idRemesa, String nuevoEstado) throws Exception {
+    String sql = "UPDATE Remesa SET estado = ?, fechaCobro = NULL WHERE idRemesa = ?";
+
+    try (Connection c = Conexion.getConnection();
+         PreparedStatement ps = c.prepareStatement(sql)) {
+
+        ps.setString(1, nuevoEstado);
+        ps.setInt(2, idRemesa);
+
+        ps.executeUpdate();
+    }
+}
+    
+    public void verificarDisponibilidad(Remesa r) throws Exception {
+    Date hoy = new Date(System.currentTimeMillis());
+
+    if (r.getFechaDisponible() != null && hoy.compareTo(r.getFechaDisponible()) >= 0) {
+        if (!"DISPONIBLE".equals(r.getEstado())) {
+            actualizarEstado(r.getIdRemesa(), "DISPONIBLE");
+            registrarHistorial(r.getIdRemesa(), "DISPONIBLE");
+            r.setEstado("DISPONIBLE");
+        }
+    }
+}
+
+
+}
+
 

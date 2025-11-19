@@ -44,7 +44,11 @@
         Listar Remesas
     </a>
 
+    <a class="card-menu" href="remesa/cobrar.jsp">
+        <i class="bi bi-currency-dollar icon"></i>
+        Cobrar Remesa
     </a>
+
 </div>
 
 </body>

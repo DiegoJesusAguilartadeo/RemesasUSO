@@ -7,7 +7,7 @@
   try { 
       lista = new DestinatarioDAO().listar(); 
   } catch(Exception e){ 
-      out.print("Error: "+e.getMessage()); 
+      out.print("Error: " + e.getMessage()); 
   }
 %>
 
@@ -24,13 +24,10 @@
 
     <h2 class="titulo-destinatarios">Listado de Destinatarios</h2>
 
-    
-<a href="${pageContext.request.contextPath}/destinatario/registrar.jsp" 
-   class="btn-nuevo-destinatario">
-    <span class="icono">➕</span> Nuevo Destinatario
-</a>
-
-
+    <a href="${pageContext.request.contextPath}/destinatario/registrar.jsp" 
+       class="btn-nuevo-destinatario">
+        <span class="icono">➕</span> Nuevo Destinatario
+    </a>
 
     <table class="table table-striped table-bordered text-center">
         <thead>
@@ -60,5 +57,3 @@
 
 </body>
 </html>
-
-</body></html>

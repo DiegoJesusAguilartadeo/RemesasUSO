@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <%@ include file="/plantillas/registro-estilos.jsp" %>
 
 <!DOCTYPE html>
@@ -32,10 +31,11 @@
     </form>
 
     <div class="volver">
-        <a href="${pageContext.request.contextPath}/destinatario/listar.jsp">ver lista</a>
+        <a href="${pageContext.request.contextPath}/destinatario/listar.jsp">Ver lista</a>
     </div>
 
 </div>
 
 </body>
 </html>
+des

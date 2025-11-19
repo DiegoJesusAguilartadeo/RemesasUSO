@@ -1,7 +1,6 @@
 <%@ page import="java.util.*,dao.RemitenteDAO,model.Remitente" %>
 <%@ include file="/plantillas/remitente-lista-estilo.jsp" %>
 
-
 <%
   List<Remitente> lista = new ArrayList<>();
   try {
