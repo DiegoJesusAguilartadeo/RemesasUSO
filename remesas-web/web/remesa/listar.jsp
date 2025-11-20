@@ -3,7 +3,11 @@
 
 <%
     List<Remesa> lista = new ArrayList<>();
-    try { lista = new RemesaDAO().listar(); } catch(Exception e){ out.print("Error: "+e.getMessage()); }
+    try { 
+        lista = new RemesaDAO().listar(); 
+    } catch(Exception e){ 
+        out.print("Error: "+e.getMessage()); 
+    }
 
     String pinGenerado = request.getParameter("pin");
 %>
@@ -37,6 +41,7 @@
     <th>Disponible</th>
     <th>Cobro</th>
     <th>Orden</th>
+    <th>Recibo</th> <!-- ✅ NUEVA COLUMNA -->
   </tr>
 
   <% for (Remesa r : lista) { %>
@@ -50,6 +55,11 @@
       <td><%= r.getFechaDisponible() %></td>
       <td><%= (r.getFechaCobro() != null ? r.getFechaCobro() : "-") %></td>
       <td><%= r.getNumeroOrden() %></td>
+      <td>
+        <a href="${pageContext.request.contextPath}/remesa/recibo.jsp?id=<%= r.getIdRemesa() %>">
+            Ver recibo
+        </a>
+      </td>
     </tr>
   <% } %>
 
@@ -57,4 +67,3 @@
 
 </body>
 </html>
-

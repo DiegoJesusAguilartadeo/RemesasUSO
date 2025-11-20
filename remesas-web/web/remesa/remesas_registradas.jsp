@@ -1,6 +1,9 @@
-<%@ page import="java.util.*, dao.RemesaDAO, model.Remesa" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.*, dao.RemesaDAO, model.Remesa, dao.EmpleadoDAO, model.Empleado" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/plantillas/estilos-menu.jsp" %>
+
 <%
+    // Parámetros de filtros
     String tipo = request.getParameter("tipo"); // "envio" o "cobro"
     if (tipo == null || tipo.isEmpty()) {
         tipo = "cobro"; // por defecto reporte de caja (fechaCobro)
@@ -8,12 +11,28 @@
 
     String f1 = request.getParameter("fechaInicio");
     String f2 = request.getParameter("fechaFin");
+    String idEmpStr = request.getParameter("idEmpleado");
 
+    Integer idEmpleado = null;
+    if (idEmpStr != null && !idEmpStr.isEmpty()) {
+        try { idEmpleado = Integer.parseInt(idEmpStr); } catch (NumberFormatException e) {}
+    }
+
+    // Lista para el reporte
     List<Remesa> lista = new ArrayList<>();
     double totalMonto = 0.0;
     double totalFee = 0.0;
     double totalMontoTotal = 0.0;
 
+    // Lista de empleados para el combo
+    List<Empleado> empleados = new ArrayList<>();
+    try {
+        empleados = new EmpleadoDAO().listar();
+    } catch (Exception e) {
+        // si falla, simplemente no mostramos opciones
+    }
+
+    // Si ya hay fecha, generamos el reporte
     if (f1 != null && !f1.isEmpty()) {
         java.sql.Date d1 = java.sql.Date.valueOf(f1);
         java.sql.Date d2 = (f2 == null || f2.isEmpty())
@@ -21,33 +40,31 @@
                            : java.sql.Date.valueOf(f2);
 
         RemesaDAO dao = new RemesaDAO();
-        if ("envio".equals(tipo)) {
-            lista = dao.listarPorRangoFechaEnvio(d1, d2);
-        } else {
-            lista = dao.listarPorRangoFechaCobro(d1, d2);
+        try {
+            lista = dao.listarPorRangoYEmpleado(d1, d2, tipo, idEmpleado);
+        } catch (Exception e) {
+            out.println("<p style='color:red'>Error al obtener datos: " + e.getMessage() + "</p>");
         }
 
         for (Remesa r : lista) {
             totalMonto      += r.getMonto();
-            totalFee        += r.getFee();        // <-- sin null
-            totalMontoTotal += r.getMontoTotal(); // <-- sin null
+            totalFee        += r.getFee();
+            totalMontoTotal += r.getMontoTotal();
         }
     }
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Reporte de Remesas por Fecha</title>
 
-    <!-- Enlaza tu CSS general -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
 
     <style>
-        /* Ajustes suaves por si tu CSS no cubre esto */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background-color: #f4f5fb;
         }
         .page-container {
             max-width: 1100px;
@@ -56,16 +73,41 @@
             border-radius: 12px;
             padding: 20px 24px;
             box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+            color: #000;
         }
+        .page-container .page-title,
+        .page-container .page-subtitle,
+        .page-container label,
+        .page-container th,
+        .page-container td,
+        .page-container .tag,
+        .page-container input,
+        .page-container select {
+            color: #000;
+        }
+
         .page-title {
             font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         .page-subtitle {
             font-size: 0.9rem;
-            color: #6b7280;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .btn-back {
+            font-size: 0.8rem;
+            color: #4b5563;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            text-decoration: underline;
         }
         .filtros {
             display: flex;
@@ -77,7 +119,7 @@
         .filtros label {
             font-size: 0.8rem;
             font-weight: 600;
-            color: #374151;
+            color: #000;
         }
         .filtros input,
         .filtros select {
@@ -94,7 +136,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
+            color: #ffffff;
         }
         .btn-primary:hover {
             opacity: 0.9;
@@ -133,23 +175,8 @@
             padding: 4px 10px;
             border-radius: 999px;
             background: #eff6ff;
-            color: #1d4ed8;
             font-size: 0.75rem;
             font-weight: 600;
-        }
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-        .btn-back {
-            font-size: 0.8rem;
-            color: #4b5563;
-            text-decoration: none;
-        }
-        .btn-back:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -158,9 +185,9 @@
 <div class="page-container">
     <div class="toolbar">
         <div>
-            <div class="page-title">Reporte de remesas por fecha</div>
+            <div class="page-title">REPORTES</div>
             <div class="page-subtitle">
-                Muestra las remesas por <strong><%= "envio".equals(tipo) ? "fecha de envío" : "fecha de cobro" %></strong>.
+                Filtra y genera reportes mensuales
             </div>
         </div>
         <a class="btn-back" href="${pageContext.request.contextPath}/index.jsp">&#8592; Volver al menú</a>
@@ -183,6 +210,23 @@
         <div>
             <label>Hasta</label><br>
             <input type="date" name="fechaFin" value="<%= (f2 != null ? f2 : "") %>">
+        </div>
+
+        <div>
+            <label>Empleado (registro)</label><br>
+            <select name="idEmpleado">
+                <option value="">Todos</option>
+                <%
+                    for (Empleado e : empleados) {
+                        boolean selected = (idEmpleado != null && idEmpleado.equals(e.getIdEmpleado()));
+                %>
+                    <option value="<%= e.getIdEmpleado() %>" <%= selected ? "selected" : "" %>>
+                        <%= e.getNombre() %> - <%= e.getCorreo() %>
+                    </option>
+                <%
+                    }
+                %>
+            </select>
         </div>
 
         <div>
@@ -209,6 +253,7 @@
             <th>Fecha envío</th>
             <th>Fecha cobro</th>
             <th>Estado</th>
+            <th>Empleado reg.</th>
         </tr>
         </thead>
         <tbody>
@@ -219,21 +264,22 @@
         <tr>
             <td><%= i++ %></td>
             <td><%= r.getIdRemesa() %></td>
-            <td><%= r.getIdRemitente() %></td>
-            <td><%= r.getIdDestinatario() %></td>
+            <td><%= r.getNombreRemitente() %></td>
+            <td><%= r.getNombreDestinatario() %></td>
             <td>$ <%= String.format(Locale.US, "%.2f", r.getMonto()) %></td>
             <td>$ <%= String.format(Locale.US, "%.2f", r.getFee()) %></td>
             <td>$ <%= String.format(Locale.US, "%.2f", r.getMontoTotal()) %></td>
-            <td><%= r.getFechaEnvio() != null ? r.getFechaEnvio() : "" %></td>
+            <td><%= r.getFechaEnvio()  != null ? r.getFechaEnvio()  : "" %></td>
             <td><%= r.getFechaCobro() != null ? r.getFechaCobro() : "" %></td>
             <td><%= r.getEstado() %></td>
+            <td><%= r.getIdEmpleadoRegistro() != null ? r.getIdEmpleadoRegistro() : "" %></td>
         </tr>
         <%
             }
             if (lista.isEmpty()) {
         %>
         <tr>
-            <td colspan="10" style="text-align:center; color:#9ca3af; padding:14px;">
+            <td colspan="11" style="text-align:center; color:#9ca3af; padding:14px;">
                 No hay remesas en el rango seleccionado.
             </td>
         </tr>

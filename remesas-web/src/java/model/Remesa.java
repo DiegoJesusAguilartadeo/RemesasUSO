@@ -27,6 +27,10 @@ public class Remesa {
     private Integer idEmpleadoRegistro; // quien registró la remesa en el sistema (operador)
     private Integer idEmpleadoCobro;    // quien efectivamente hizo el cobro
 
+    // 🔹 Nuevos campos para los reportes (nombres en vez de IDs)
+    private String nombreRemitente;
+    private String nombreDestinatario;
+
     public Remesa() {}
 
     public Remesa(int idRemitente, int idDestinatario, double monto, Date fechaEnvio, String referencia) {
@@ -37,7 +41,7 @@ public class Remesa {
         this.referencia = referencia;
     }
 
-    // getters / setters (incluyo solo los nuevos y los usados; puedes generar el resto si necesitas)
+    // getters / setters
     public int getIdRemesa() { return idRemesa; }
     public void setIdRemesa(int idRemesa) { this.idRemesa = idRemesa; }
 
@@ -91,4 +95,11 @@ public class Remesa {
 
     public Integer getIdEmpleadoCobro() { return idEmpleadoCobro; }
     public void setIdEmpleadoCobro(Integer idEmpleadoCobro) { this.idEmpleadoCobro = idEmpleadoCobro; }
+
+    // 🔹 Nuevos getters/setters para nombres
+    public String getNombreRemitente() { return nombreRemitente; }
+    public void setNombreRemitente(String nombreRemitente) { this.nombreRemitente = nombreRemitente; }
+
+    public String getNombreDestinatario() { return nombreDestinatario; }
+    public void setNombreDestinatario(String nombreDestinatario) { this.nombreDestinatario = nombreDestinatario; }
 }
