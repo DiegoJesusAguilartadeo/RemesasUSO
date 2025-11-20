@@ -3,7 +3,13 @@
 <body>
 <h2>REMESAS USO</h2>
 <ul>
-
+  <li><a href="destinatario/registrar.jsp">Registrar Destinatario</a></li>
+  <li><a href="destinatario/listar.jsp">Listar Destinatarios</a></li>
+  <li><a href="remitente/registrar.jsp">Registrar Remitente</a></li>
+  <li><a href="remitente/listar.jsp">Listar Remitentes</a></li>
+  <li><a href="remesa/registrar.jsp">Registrar Remesa</a></li>
+  <li><a href="remesa/listar.jsp">Listar Remesas</a></li>
+  <li><a href="remesa/cobrar.jsp">cobrar</a></li>
 
 </ul>
 </body></html>
@@ -61,11 +67,17 @@
     <i class="bi bi-door-closed icon"></i>
         Cerrar Sesion
     </a>
-    <li>
-    <a href="${pageContext.request.contextPath}/remesa/reporteFecha.jsp">
-        Reporte de remesas por fecha
-    </a>
-</li>
+    
+<a class="card-menu" href="${pageContext.request.contextPath}/remesa/remesas_registradas.jsp">
+    <i class="bi bi-people icon"></i>
+    Remesas Registradas
+</a>
+
+<a class="card-menu" href="${pageContext.request.contextPath}/remesa/remesas_cobradas.jsp">
+    <i class="bi bi-person-check icon"></i>
+    Remesas Cobradas
+</a>
+
 
 
 

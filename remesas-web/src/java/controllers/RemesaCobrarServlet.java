@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/remesa/cobrar")
+@WebServlet(name = "RemesaCobrarServlet", urlPatterns = {"/remesa/cobrar"})
 public class RemesaCobrarServlet extends HttpServlet {
 
     @Override
@@ -29,10 +29,10 @@ public class RemesaCobrarServlet extends HttpServlet {
 
         try {
             RemesaDAO dao = new RemesaDAO();
-            dao.cobrarRemesa(pin);
+            dao.cobrarRemesa(pin);   // ESTE MÉTODO LO ARMAMOS AHORA MISMO
 
             req.setAttribute("pin", pin);
-            req.getRequestDispatcher("/remesa/comprobante.jsp").forward(req, resp);
+            req.getRequestDispatcher("/remesa/comprobanteCobro.jsp").forward(req, resp);
 
         } catch (Exception ex) {
             req.setAttribute("error", ex.getMessage());

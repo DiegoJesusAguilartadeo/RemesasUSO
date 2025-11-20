@@ -1,0 +1,47 @@
+[33mc1e815e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdiego-dev[m[33m)[m HEAD@{0}: commit: registrar remesas update
+[33m61f4225[m HEAD@{1}: commit: feat employees added
+[33m4fa50db[m HEAD@{2}: commit: feat cobrar had been recently added
+[33mce51a55[m HEAD@{3}: commit: marlon-diego merge
+[33ma7ff0dc[m HEAD@{4}: pull origin diego-dev: Merge made by the 'ort' strategy.
+[33m39744ad[m HEAD@{5}: commit: design updated
+[33m26c632e[m HEAD@{6}: pull origin diego-dev: Merge made by the 'ort' strategy.
+[33m4afa3c3[m HEAD@{7}: reset: moving to HEAD
+[33m4afa3c3[m HEAD@{8}: reset: moving to HEAD
+[33m4afa3c3[m HEAD@{9}: commit: feat cobrar
+[33md0fd294[m HEAD@{10}: commit: no compromised variables were settlet
+[33mdfa661b[m HEAD@{11}: pull origin diego-dev: Merge made by the 'ort' strategy.
+[33m96671b6[m HEAD@{12}: commit: feat remesas table update
+[33m401a60c[m HEAD@{13}: reset: moving to HEAD
+[33m401a60c[m HEAD@{14}: reset: moving to 401a60c
+[33m4f4a34c[m HEAD@{15}: reset: moving to HEAD
+[33m4f4a34c[m HEAD@{16}: reset: moving to 4f4a34c
+[33m4f4a34c[m HEAD@{17}: reset: moving to 4f4a34c
+[33m7bfd11d[m HEAD@{18}: commit: feat: restore project without sensitive files
+[33m8705ef5[m HEAD@{19}: commit: chore: update gitignore to ignore sensitive config files
+[33m20b3271[m[33m ([m[1;32mmain[m[33m)[m HEAD@{20}: checkout: moving from main to diego-dev
+[33m20b3271[m[33m ([m[1;32mmain[m[33m)[m HEAD@{21}: reset: moving to origin/main
+[33m4f4a34c[m HEAD@{22}: checkout: moving from diego-dev to main
+[33mee27235[m HEAD@{23}: commit: chore: add project .gitignore
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{24}: checkout: moving from diego-dev-clean to diego-dev
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{25}: Branch: renamed refs/heads/diego-dev to refs/heads/diego-dev-clean
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{27}: rebase (abort): returning to refs/heads/diego-dev
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{28}: rebase (abort): returning to refs/heads/diego-dev
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{29}: checkout: moving from diego-dev to diego-dev
+[33m987df44[m[33m ([m[1;32mdiego-dev-clean[m[33m)[m HEAD@{30}: commit: chore: add global .gitignore
+[33m72cbf42[m HEAD@{31}: pull --rebase origin diego-dev (finish): returning to refs/heads/diego-dev
+[33m72cbf42[m HEAD@{32}: pull --rebase origin diego-dev (pick): fix: update gitignore to ignore sensitive files
+[33m401a60c[m HEAD@{33}: pull --rebase origin diego-dev (pick): feat(Auth):add Google API request
+[33m4f4a34c[m HEAD@{34}: pull --rebase origin diego-dev (start): checkout 4f4a34c07229e32e85f5a570773c0b4242c9b0c4
+[33meaf1eb2[m HEAD@{35}: commit: fix: update gitignore to ignore sensitive files
+[33m5e83580[m HEAD@{36}: rebase (abort): returning to refs/heads/diego-dev
+[33m4aee65d[m HEAD@{37}: pull origin diego-dev --rebase (start): checkout 4aee65ddf0d90263634c70984c9b8bdb7c79e602
+[33m5e83580[m HEAD@{38}: commit: feat(Auth):add Google API request
+[33m49fe8e4[m HEAD@{39}: reset: moving to 49fe8e4
+[33m3b8392a[m HEAD@{40}: commit: feat(Auth):nov25 Google request update
+[33m52d3dda[m HEAD@{41}: commit: feat(Auth):nov25 Google request update
+[33m04df8d6[m HEAD@{42}: commit: feat(Auth):nov25 Google request update
+[33m88211c5[m HEAD@{43}: commit: feat(Auth):add Google API request
+[33m4aee65d[m HEAD@{44}: commit: feat(Auth):add Google OAuth2 login
+[33m70ca481[m HEAD@{45}: commit: 
+[33m4f4a34c[m HEAD@{46}: checkout: moving from main to diego-dev
+[33m4f4a34c[m HEAD@{47}: clone: from https://github.com/DiegoJesusAguilartadeo/RemesasUSO.git

@@ -7,29 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Cobrar Remesa</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+<head><meta charset="UTF-8"><title>Cobrar Remesa</title></head>
+<body>
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h3>Cobrar Remesa</h3>
+<h2>Buscar Remesa por PIN</h2>
 
-        <% if (request.getAttribute("error") != null) { %>
-            <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
-        <% } %>
+<% if (request.getAttribute("error") != null) { %>
+    <p style="color:red;"><%= request.getAttribute("error") %></p>
+<% } %>
 
-        <form action="${pageContext.request.contextPath}/remesa/buscar" method="get">
-            <label class="form-label">Ingrese PIN:</label>
-            <input type="text" class="form-control" name="pin" required>
-            <button class="btn btn-primary w-100 mt-3">Buscar</button>
-        </form>
-    </div>
-</div>
+<form action="${pageContext.request.contextPath}/remesa/buscarCobro" method="get">
+    <label>PIN:</label>
+    <input type="text" name="pin" required />
+    <button type="submit">Buscar</button>
+</form>
 
 </body>
 </html>
-
