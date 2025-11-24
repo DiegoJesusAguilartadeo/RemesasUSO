@@ -1,0 +1,91 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 23, 2025, 11:43:18 PM
+    Author     : USER
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #004e92, #000428);
+    margin: 0;
+    padding: 20px;
+    color: white;
+}
+
+.contenedor {
+    background: white;
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    color: #222;
+}
+
+.titulo {
+    text-align: center;
+    font-size: 26px;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn-nuevo {
+    background: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-nuevo:hover {
+    background: #0056b3;
+}
+
+.btn-regresar {
+    background: #999;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-regresar:hover {
+    background: #666;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla th {
+    background: #003366;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabla tr:hover {
+    background: #e9f1ff;
+}

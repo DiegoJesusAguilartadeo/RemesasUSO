@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Remesas</title></head>
+<body>
+<h2>Sistema de Remesas</h2>
+<ul>
+  <li><a href="destinatario/registrar.jsp">Registrar Destinatario</a></li>
+  <li><a href="destinatario/listar.jsp">Listar Destinatarios</a></li>
+  <li><a href="remitente/registrar.jsp">Registrar Remitente</a></li>
+  <li><a href="remitente/listar.jsp">Listar Remitentes</a></li>
+  <li><a href="remesa/registrar.jsp">Registrar Remesa</a></li>
+  <li><a href="remesa/listar.jsp">Listar Remesas</a></li>
+  <li><a href="remesa/cobrar.jsp">cobrar</a></li>
+
+</ul>
+</body></html>
+=======
+>>>>>>> marlon-disenio
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/plantillas/estilos-menu.jsp" %>
 
@@ -45,6 +63,10 @@
     </a>
 
     <a class="card-menu" href="remesa/cobrar.jsp">
+<<<<<<< HEAD
+        <i class="bi bi-currency-dollar icon"></i>
+        Cobrar Remesa
+=======
         <i class="bi bi-wallet2 icon"></i>
         Cobrar Remesas
     </a>
@@ -65,6 +87,7 @@
     <a class="card-menu" href="${pageContext.request.contextPath}/remesa/remesas_cobradas.jsp">
         <i class="bi bi-person-check icon"></i>
         Remesas Cobradas
+>>>>>>> marlon-disenio
     </a>
 
 </div>

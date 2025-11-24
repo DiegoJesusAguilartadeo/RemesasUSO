@@ -2,7 +2,6 @@
 <%
     String ctx = request.getContextPath();
 %>
-<link rel="stylesheet" type="text/css" href="<%= ctx %>/plantillas/registrarremesas_styles.jsp">
 
 <!DOCTYPE html>
 <html>
@@ -10,51 +9,56 @@
 <meta charset="UTF-8">
 <title>Registrar Remesa</title>
 
+<!-- ENLACE AL CSS -->
+<link rel="stylesheet" href="<%= ctx %>/plantillascss/registrarremesas.css">
+
 </head>
 <body>
 
-<h2>Registrar Remesa</h2>
+<div class="contenedor-registro">
 
-<form method="post" action="<%= ctx %>/remesa/registrar">
+    <h2 class="titulo-registro">Registrar Remesa</h2>
 
-    <!-- REMITENTE -->
-    <label>Buscar Remitente:</label>
-    <input type="text" id="buscarRemitente">
-    <button type="button" id="btnBuscarRemitente">Buscar</button>
+    <form method="post" action="<%= ctx %>/remesa/registrar">
 
-    <label>Coincidencias:</label>
-    <select id="comboRemitente" style="display:none;"></select>
+        <!-- REMITENTE -->
+        <label>Buscar Remitente:</label>
+        <input type="text" id="buscarRemitente">
+        <button type="button" id="btnBuscarRemitente">Buscar</button>
 
-    <input type="hidden" id="idRemitente" name="idRemitente">
+        <label>Coincidencias:</label>
+        <select id="comboRemitente" style="display:none;"></select>
 
-    <br><br>
+        <input type="hidden" id="idRemitente" name="idRemitente">
 
-    <!-- DESTINATARIO -->
-    <label>Buscar Destinatario:</label>
-    <input type="text" id="buscarDestinatario">
-    <button type="button" id="btnBuscarDestinatario">Buscar</button>
+        <!-- DESTINATARIO -->
+        <label>Buscar Destinatario:</label>
+        <input type="text" id="buscarDestinatario">
+        <button type="button" id="btnBuscarDestinatario">Buscar</button>
 
-    <label>Coincidencias:</label>
-    <select id="comboDestinatario" style="display:none;"></select>
+        <label>Coincidencias:</label>
+        <select id="comboDestinatario" style="display:none;"></select>
 
-    <input type="hidden" id="idDestinatario" name="idDestinatario">
+        <input type="hidden" id="idDestinatario" name="idDestinatario">
 
-    <br><br>
+        <!-- DATOS DE REMESA -->
+        <label>Monto:</label>
+        <input type="number" name="monto" step="0.01" required>
 
-    <!-- DATOS DE REMESA -->
-    <label>Monto:</label>
-    <input type="number" name="monto" step="0.01" required>
+        <label>Fecha Envío:</label>
+        <input type="date" name="fechaEnvio" required>
 
-    <label>Fecha Envío:</label>
-    <input type="date" name="fechaEnvio" required>
+        <label>Referencia:</label>
+        <input type="text" name="referencia">
 
-    <label>Referencia:</label>
-    <input type="text" name="referencia">
+        <button type="submit">Guardar Remesa</button>
+    </form>
 
-    <br><br>
-    <button type="submit">Guardar Remesa</button>
-</form>
+    <div class="volver">
+        <a href="<%= ctx %>/index.jsp">Volver</a>
+    </div>
 
+</div>
 
 <script>
 // ---------------------- REMITENTE ---------------------------
@@ -134,4 +138,3 @@ document.getElementById("btnBuscarDestinatario").onclick = buscarDestinatario;
 
 </body>
 </html>
-

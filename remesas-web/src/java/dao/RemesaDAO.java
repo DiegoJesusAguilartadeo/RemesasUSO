@@ -112,6 +112,14 @@ public class RemesaDAO {
             ps.executeUpdate();
         }
     }
+<<<<<<< HEAD
+    
+    public void cobrarRemesa(String pin) throws Exception {
+    String sql = "UPDATE Remesa " +
+                 "SET estado = 'PAGADA', fechaCobro = GETDATE() " +
+                 "WHERE pin = ? AND estado = 'DISPONIBLE'";
+=======
+>>>>>>> marlon-disenio
 
     /** 
      * Verifica si ya pasó la fechaDisponible y cambia a DISPONIBLE
@@ -321,4 +329,11 @@ public Remesa obtenerPorIdConDetalles(int idRemesa) throws Exception {
     return null;
 }
 
+<<<<<<< HEAD
+
 }
+
+
+=======
+}
+>>>>>>> marlon-disenio

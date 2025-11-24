@@ -1,6 +1,6 @@
 <%-- 
     Document   : login
-    Created on : Nov 13, 2025, 5:23:53 PM
+    Created on : Nov 13, 2025, 5:23:53 PM
     Author     : jeusu
 --%>
 
@@ -20,9 +20,9 @@
     <div class="titulo">Iniciar sesión</div>
     <div class="subtexto">Usa tu cuenta de Google para iniciar sesión</div>
 
-    <%
+    <% 
         String error = request.getParameter("error");
-        if (error != null) {
+        if (error != null) { 
     %>
         <div class="error">
             <%
@@ -41,17 +41,26 @@
                 }
             %>
         </div>
-    <%
-        }
+    <% 
+        } 
     %>
 
     <a href="<%= request.getContextPath() %>/login/google" style="text-decoration:none;">
+<<<<<<< HEAD
+        <button class="boton-google">
+            <img src="https://www.google.com/favicon.ico" 
+                 style="width:20px; height:20px;" />
+            Iniciar sesión con Google
+        </button>
+    </a>
+=======
     <button class="boton-google">
         <img src="https://www.google.com/favicon.ico" 
              style="width:20px; height:20px;" />
         Iniciar sesión con Google
     </button>
 </a>
+>>>>>>> marlon-disenio
 
 </div>
 
