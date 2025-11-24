@@ -5,8 +5,9 @@
   List<Destinatario> lista = new ArrayList<>();
   try { lista = new DestinatarioDAO().listar(); } 
   catch(Exception e){ out.print("Error: "+e.getMessage()); }
-  
+
   String modo = request.getParameter("modoSeleccion");
+  String ctx = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -14,14 +15,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Destinatarios</title>
+
+<link rel="stylesheet" href="<%= ctx %>/plantillascss/listardestinatario.css">
 </head>
 <body>
 
-<h2>Destinatarios</h2>
+<div class="contenedor">
 
-<p><a href="${pageContext.request.contextPath}/destinatario/registrar.jsp">Nuevo</a></p>
+<h2>Lista de Destinatarios</h2>
 
-<table border="1" cellpadding="6">
+<!-- Botones -->
+<a href="<%= ctx %>/destinatario/registrar.jsp" class="btn">➕ Nuevo</a>
+<a href="<%= ctx %>/" class="btn btn-regresar">⬅ Regresar</a>
+
+<table>
   <tr>
     <th>ID</th>
     <th>Nombre</th>
@@ -29,7 +36,6 @@
     <th>Teléfono</th>
     <th>Dirección</th>
 
-    <%-- Solo mostrar esta columna si venimos en modo selección --%>
     <% if ("destinatario".equals(modo)) { %>
         <th>Seleccionar</th>
     <% } %>
@@ -45,18 +51,18 @@
 
       <% if ("destinatario".equals(modo)) { %>
         <td>
-          <a href="${pageContext.request.contextPath}/remesa/registrar.jsp
-              ?idDestinatario=<%= d.getIdDestinatario() %>
-              &nombreDestinatario=<%= d.getNombre() %> <%= d.getApellido() %>">
+          <a class="seleccionar" 
+             href="<%= ctx %>/remesa/registrar.jsp?idDestinatario=<%= d.getIdDestinatario() %>&nombreDestinatario=<%= d.getNombre() %> <%= d.getApellido() %>">
             Seleccionar
           </a>
         </td>
       <% } %>
-
     </tr>
   <% } %>
+
 </table>
+
+</div>
 
 </body>
 </html>
-
