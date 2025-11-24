@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/gamer/OneDrive/Documentos/GitHub/RemesasUSO/remesas-web/src/java/dao/RemesaDAO.java</file>
+            <file>file:/C:/Users/gamer/OneDrive/Documentos/GitHub/RemesasUSO/remesas-web/web/remesa/comprobante.jsp</file>
             <file>file:/C:/Users/gamer/OneDrive/Documentos/GitHub/RemesasUSO/remesas-web/web/remesa/remesas_registradas.jsp</file>
+            <file>file:/C:/Users/gamer/OneDrive/Documentos/GitHub/RemesasUSO/remesas-web/web/remesa/recibo.jsp</file>
+            <file>file:/C:/Users/gamer/OneDrive/Documentos/GitHub/RemesasUSO/remesas-web/web/remesa/listar.jsp</file>
         </group>
     </open-files>
 </project-private>

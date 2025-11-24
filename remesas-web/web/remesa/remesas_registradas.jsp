@@ -41,6 +41,7 @@
 
         RemesaDAO dao = new RemesaDAO();
         try {
+            // este método debe filtrar por rango, tipo (envio/cobro) y empleado (puede ser null = todos)
             lista = dao.listarPorRangoYEmpleado(d1, d2, tipo, idEmpleado);
         } catch (Exception e) {
             out.println("<p style='color:red'>Error al obtener datos: " + e.getMessage() + "</p>");
@@ -178,6 +179,51 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
+
+        /* Encabezado del reporte */
+        .reporte-header {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+        .logo-reporte {
+            width: 60px;
+            height: auto;
+        }
+        .reporte-header .info h2 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .reporte-header .info p {
+            margin: 2px 0;
+            font-size: 0.85rem;
+        }
+
+        @media print {
+            .filtros,
+            .toolbar,
+            .btn-primary,
+            .btn-back {
+                display: none !important;
+            }
+
+            .page-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+            }
+
+            body {
+                background: white;
+            }
+
+            .reporte-header {
+                display: flex !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -190,7 +236,24 @@
                 Filtra y genera reportes mensuales
             </div>
         </div>
-        <a class="btn-back" href="${pageContext.request.contextPath}/index.jsp">&#8592; Volver al menú</a>
+        <div style="display:flex; gap:12px; align-items:center;">
+            <button type="button" class="btn-primary" onclick="window.print()">🖨 Imprimir</button>
+            <a class="btn-back" href="${pageContext.request.contextPath}/index.jsp">&#8592; Volver al menú</a>
+        </div>
+    </div>
+
+    <!-- Encabezado del reporte con usuario y fecha -->
+    <div class="reporte-header">
+        <img src="${pageContext.request.contextPath}/img/logo.png" class="logo-reporte" alt="Logo">
+        <div class="info">
+            <h2>Casa de Remesas</h2>
+            <p><strong>Reporte generado:</strong> <%= new java.util.Date() %></p>
+            <p><strong>Generado por:</strong>
+                <%= (session.getAttribute("usuario_nombre") != null
+                        ? session.getAttribute("usuario_nombre")
+                        : "Empleado no identificado") %>
+            </p>
+        </div>
     </div>
 
     <form method="get" class="filtros">
