@@ -1,41 +1,46 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="/plantillas/registro-estilos.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%
+    String ctx = request.getContextPath();
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Registrar Destinatario</title>
+    <title>Nuevo Destinatario</title>
+
+    <!-- ENLACE AL CSS -->
+    <link rel="stylesheet" href="<%= ctx %>/plantillascss/registrardestinatario.css">
 </head>
+
 <body>
 
-<div class="contenedor-registro">
-
-    <div class="titulo-registro">Registrar Destinatario</div>
+<div class="contenedor-destinatario">
+    <div class="titulo">Registrar Destinatario</div>
 
     <form method="post" action="${pageContext.request.contextPath}/destinatario/registrar">
 
         <label>Nombre:</label>
-        <input type="text" name="nombre" required>
+        <input name="nombre" required>
 
         <label>Apellido:</label>
-        <input type="text" name="apellido" required>
+        <input name="apellido" required>
 
         <label>Teléfono:</label>
-        <input type="text" name="telefono">
+        <input name="telefono">
 
         <label>Dirección:</label>
-        <input type="text" name="direccion">
+        <input name="direccion">
 
         <button type="submit">Guardar</button>
     </form>
+    
+    <button type="button" onclick="history.back()">Regresar</button>
 
     <div class="volver">
-        <a href="${pageContext.request.contextPath}/destinatario/listar.jsp">Ver lista</a>
+        <a href="${pageContext.request.contextPath}/destinatario/listar.jsp">Ver Lista</a>
     </div>
-
 </div>
 
 </body>
 </html>
-des

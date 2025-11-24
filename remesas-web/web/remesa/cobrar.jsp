@@ -3,24 +3,39 @@
     Created on : Nov 17, 2025, 1:49:44 AM
     Author     : jeusu
 --%>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%
+    String ctx = request.getContextPath();
+%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Cobrar Remesa</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Cobrar Remesa</title>
+
+    <!-- ENLACE AL CSS -->
+    <link rel="stylesheet" href="<%= ctx %>/plantillascss/cobrarremesa.css">
+</head>
 <body>
 
-<h2>Buscar Remesa por PIN</h2>
+<div class="contenedor-cobro">
 
-<% if (request.getAttribute("error") != null) { %>
-    <p style="color:red;"><%= request.getAttribute("error") %></p>
-<% } %>
+    <div class="titulo-cobro">Cobrar Remesa</div>
 
-<form action="${pageContext.request.contextPath}/remesa/buscarCobro" method="get">
-    <label>PIN:</label>
-    <input type="text" name="pin" required />
-    <button type="submit">Buscar</button>
-</form>
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="error"><%= request.getAttribute("error") %></div>
+    <% } %>
+
+    <form action="${pageContext.request.contextPath}/remesa/buscarCobro" method="get">
+        <label>PIN:</label>
+        <input type="text" name="pin" required />
+        <button type="submit">Buscar</button>
+    </form>
+
+    <a href="<%= ctx %>/index.jsp" class="btn-regresar">⬅ Regresar</a>
+
+</div>
 
 </body>
 </html>

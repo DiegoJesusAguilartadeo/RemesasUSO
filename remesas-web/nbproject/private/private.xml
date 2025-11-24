@@ -3,14 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/RemitenteListarServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/DestinatarioRegistrarServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/DestinatarioListarServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/RemesaRegistrarServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/RemesaListarServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/dao/RemesaDAO.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/controllers/GoogleLoginServlet.java</file>
-            <file>file:/C:/Proyectos/RemesasUSO/remesas-web/src/java/utils/Config.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/config/config.properties</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/dao/Conexion.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/DestinatarioListarServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/RemesaListarServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/login/login.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/destinatario/registrar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/destinatario/listar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillas/diseño.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillas/estilos-menu.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillas/Loginestilos.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remitente/registrar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remitente/listar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remesa/registrar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/DestinatarioRegistrarServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/index.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/GoogleLoginServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/webServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/RemitenteRegistrarServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/services/RemesaService.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/dao/EmpleadoDAO.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/model/Empleado.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/controllers/OAuth2CallbackServlet.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/src/java/utils/Config.java</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillas/registrarremesas_styles.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remesa/remesas_registradas.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/registrarremesas.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/registrardestinatario.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/listardestinatario.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/registrarremitente.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/listarremitente.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/listarremesas.css</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remesa/listar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/remesa/cobrar.jsp</file>
+            <file>file:/C:/Users/USER/Desktop/proyectos/RemesasUSO/remesas-web/web/plantillascss/cobrarremesa.css</file>
         </group>
     </open-files>
 </project-private>

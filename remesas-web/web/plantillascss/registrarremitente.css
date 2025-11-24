@@ -1,0 +1,94 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 23, 2025, 10:55:19 PM
+    Author     : USER
+*/
+
+/* Fondo general */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #004e92, #000428);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del formulario */
+.contenedor {
+    background: white;
+    width: 420px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Etiquetas */
+label {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #004e92;
+    outline: none;
+}
+
+/* Botón guardar */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #004e92;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background: #003366;
+}
+
+/* Botón regresar */
+.btn-regresar {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    background: #777;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.btn-regresar:hover {
+    background: #555;
+}

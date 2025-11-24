@@ -1,56 +1,75 @@
 <%@ page import="java.util.*,dao.DestinatarioDAO,model.Destinatario" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ include file="/plantillas/listar-estilos.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-  List<Destinatario> lista = new ArrayList<>();
-  try { 
-      lista = new DestinatarioDAO().listar(); 
-  } catch(Exception e){ 
-      out.print("Error: " + e.getMessage()); 
-  }
+    List<Destinatario> lista = new ArrayList<>();
+    try { 
+        lista = new DestinatarioDAO().listar(); 
+    } catch(Exception e){ 
+        out.print("Error: " + e.getMessage()); 
+    }
+
+    String modo = request.getParameter("modoSeleccion");
+    String ctx = request.getContextPath();
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Destinatarios</title>
+    <title>Destinatarios</title>
+
+    <!-- Tu CSS separado -->
+    <link rel="stylesheet" href="<%= ctx %>/plantillascss/listardestinatario.css">
 </head>
 
 <body>
 
-<div class="container container-box">
+<div class="contenedor">
 
-    <h2 class="titulo-destinatarios">Listado de Destinatarios</h2>
+    <h2>Lista de Destinatarios</h2>
 
-    <a href="${pageContext.request.contextPath}/destinatario/registrar.jsp" 
-       class="btn-nuevo-destinatario">
-        <span class="icono">➕</span> Nuevo Destinatario
+    <!-- Botones -->
+    <a href="<%= ctx %>/destinatario/registrar.jsp" class="btn">
+        ➕ Nuevo
     </a>
 
-    <table class="table table-striped table-bordered text-center">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-            </tr>
-        </thead>
+    <a href="<%= ctx %>/" class="btn btn-regresar">
+        ⬅ Regresar
+    </a>
 
-        <tbody>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+
+            <% if ("destinatario".equals(modo)) { %>
+                <th>Seleccionar</th>
+            <% } %>
+        </tr>
+
         <% for (Destinatario d : lista) { %>
-            <tr>
-                <td><%= d.getIdDestinatario() %></td>
-                <td><%= d.getNombre() %></td>
-                <td><%= d.getApellido() %></td>
-                <td><%= d.getTelefono() %></td>
-                <td><%= d.getDireccion() %></td>
-            </tr>
+        <tr>
+            <td><%= d.getIdDestinatario() %></td>
+            <td><%= d.getNombre() %></td>
+            <td><%= d.getApellido() %></td>
+            <td><%= d.getTelefono() %></td>
+            <td><%= d.getDireccion() %></td>
+
+            <% if ("destinatario".equals(modo)) { %>
+                <td>
+                    <a class="seleccionar"
+                       href="<%= ctx %>/remesa/registrar.jsp?idDestinatario=<%= d.getIdDestinatario() %>&nombreDestinatario=<%= d.getNombre() %> <%= d.getApellido() %>">
+                        Seleccionar
+                    </a>
+                </td>
+            <% } %>
+        </tr>
         <% } %>
-        </tbody>
+
     </table>
 
 </div>

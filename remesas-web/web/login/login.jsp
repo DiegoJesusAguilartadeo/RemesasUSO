@@ -46,12 +46,21 @@
     %>
 
     <a href="<%= request.getContextPath() %>/login/google" style="text-decoration:none;">
+<<<<<<< HEAD
         <button class="boton-google">
             <img src="https://www.google.com/favicon.ico" 
                  style="width:20px; height:20px;" />
             Iniciar sesión con Google
         </button>
     </a>
+=======
+    <button class="boton-google">
+        <img src="https://www.google.com/favicon.ico" 
+             style="width:20px; height:20px;" />
+        Iniciar sesión con Google
+    </button>
+</a>
+>>>>>>> marlon-disenio
 
 </div>
 

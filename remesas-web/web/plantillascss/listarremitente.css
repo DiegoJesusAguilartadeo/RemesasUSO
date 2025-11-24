@@ -1,0 +1,110 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 23, 2025, 11:30:29 PM
+    Author     : USER
+*/
+
+/* Fondo general */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #004e92, #000428);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+}
+
+/* Contenedor */
+.contenedor {
+    background: white;
+    width: 900px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+}
+
+/* Título */
+.titulo {
+    text-align: center;
+    font-size: 26px;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #004e92;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: #003366;
+}
+
+.btn-secondary {
+    background: #777;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.btn-secondary:hover {
+    background: #555;
+}
+
+/* Tabla */
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th {
+    background: #003366;
+    color: white;
+    padding: 10px;
+}
+
+.tabla td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabla tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.tabla tr:hover {
+    background: #e2e2ff;
+}
+
+/* Enlace seleccionar */
+.seleccionar {
+    color: #004e92;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.seleccionar:hover {
+    text-decoration: underline;
+}
